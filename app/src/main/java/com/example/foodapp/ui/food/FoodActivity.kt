@@ -1,11 +1,12 @@
-package com.example.foodapp
+package com.example.foodapp.ui.food
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.foodapp.R
 
-class MainActivity : AppCompatActivity() {
+class FoodActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_food)
     }
 }

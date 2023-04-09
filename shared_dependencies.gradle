@@ -16,10 +16,13 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
+//    implementation "io.insert-koin:koin-core:$koin_version"
+//    implementation "io.insert-koin:koin-android:$koin_version"
+
     //koin
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+//    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     //rx-Java
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'

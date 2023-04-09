@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Category.MainActivity">
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:id="@+id/rvCategory"
-        android:layout_height="match_parent"/>
+    tools:context=".ui.food.FoodActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
