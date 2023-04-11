@@ -1,6 +1,7 @@
 package com.example.core.di
 
 import com.example.core.domain.repository.CategoryRepo
+import com.example.core.source.db.remote.RemoteDataSource
 import com.example.core.source.db.remote.network.ApiService
 import com.example.core.source.mapper.CategoryMapper
 import com.example.core.source.mapper.CategoryMapperImp
@@ -22,7 +23,7 @@ fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return  Retrofit.Builder()
         .baseUrl("https://www.themealdb.com/api/json/v1/1/")
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpClient)
         .build()
 }
@@ -32,7 +33,12 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
 
     val networkModule = module {
         factory {
+
+            val httpLoggingInterceptor = HttpLoggingInterceptor()
+            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
             OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
 //                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
@@ -51,17 +57,19 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
 //        }
     }
 
-    fun getExecutor(): Executor {
-        return Executors.newFixedThreadPool(2)
-    }
+//    fun getExecutor(): Executor {
+//        return Executors.newFixedThreadPool(2)
+//    }
 
     val repositoryModule = module {
         factory { AppExecutors() }
+        factory { RemoteDataSource(get()) }
 
         factory<CategoryRepo> {
             CategoryRepository(
                 get(),
-                get()
+                get(),
+                get ()
             )
         }
     }

@@ -39,6 +39,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
     inner class ListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val binding = ItemRecyclerBinding.bind(itemView)
         fun bind(data: Category) {
+            binding.categoryTitle.text = data.strCategory
             with(binding) {
                 Glide.with(itemView.context)
                     .load(data.strCategoryThumb)

@@ -9,5 +9,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("categories.php")
-    fun getCategory(): Single<CategoryResponse>
+    suspend fun getCategory(): CategoryResponse
 }
