@@ -1,12 +1,9 @@
-package com.example.foodapp.ui.Category
+package com.example.foodapp.ui.category
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import com.example.core.domain.model.Category
-import com.example.core.domain.usecase.CategoryUseCase
+import com.example.core.domain.usecase.category.CategoryUseCase
 import com.example.core.ui.BaseVM
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MainVM (
     private val categoryUseCase: CategoryUseCase

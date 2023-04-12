@@ -9,7 +9,7 @@ import com.example.core.R
 import com.example.core.databinding.ItemRecyclerBinding
 import com.example.core.domain.model.Category
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
+class MainRecyclerAdapter : RecyclerView.Adapter<MainRecyclerAdapter.ListViewHolder>() {
 
     private var listData = ArrayList<Category>()
     var onItemClick: ((Category) -> Unit)? = null
@@ -24,8 +24,6 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent,false))
-
-
 
 
     override fun getItemCount() = listData.size
@@ -46,6 +44,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
                     .into(imgView)
 
             }
+            }
+        init {
+            binding.root.setOnClickListener{
+                onItemClick?.invoke(listData[adapterPosition])
+        }
         }
     }
 

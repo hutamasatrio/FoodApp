@@ -21,7 +21,7 @@
             android:name=".ui.food.FoodActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Category.MainActivity"
+            android:name=".ui.category.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

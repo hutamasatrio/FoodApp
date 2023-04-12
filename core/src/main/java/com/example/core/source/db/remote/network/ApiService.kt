@@ -1,13 +1,17 @@
 package com.example.core.source.db.remote.network
 
 import com.example.core.source.db.remote.response.CategoryResponse
-import io.reactivex.Flowable
-import io.reactivex.Observable
+import com.example.core.source.db.remote.response.FoodResponse
 import io.reactivex.Single
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("categories.php")
     suspend fun getCategory(): CategoryResponse
+
+    @GET("filter.php")
+    suspend fun getFood(
+        @Query("c") query: String
+    ): FoodResponse
 }

@@ -1,11 +1,14 @@
 package com.example.core.di
 
 import com.example.core.domain.repository.CategoryRepo
+import com.example.core.domain.repository.FoodRepo
 import com.example.core.source.db.remote.RemoteDataSource
 import com.example.core.source.db.remote.network.ApiService
 import com.example.core.source.mapper.CategoryMapper
 import com.example.core.source.mapper.CategoryMapperImp
+import com.example.core.source.mapper.FoodMapper
 import com.example.core.source.repo.CategoryRepository
+import com.example.core.source.repo.FoodRepository
 import com.example.core.utils.AppExecutors
 import com.example.foodappdagger.core.data.mapper.ItemCategoriesMapper
 import com.example.foodappdagger.core.data.mapper.ItemCategoriesMapperImp
@@ -13,10 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
@@ -72,10 +72,20 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
                 get ()
             )
         }
+
+        factory<FoodRepo> {
+            FoodRepository(
+                get(),
+                get(),
+                get()
+
+            )
+        }
     }
 
     val mapperModule = module {
         single<ItemCategoriesMapper> { ItemCategoriesMapperImp() }
         single<CategoryMapper> { CategoryMapperImp() }
+        single<FoodMapper>{FoodMapper()}
 
     }

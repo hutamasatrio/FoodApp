@@ -9,11 +9,7 @@ import com.example.core.source.db.remote.network.ApiResponse
 import com.example.core.source.db.remote.network.ApiService
 import com.example.core.source.db.remote.response.CategoryItemResponse
 import com.example.core.source.mapper.CategoryMapper
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
 
 class CategoryRepository(
     private val remoteDataSource: RemoteDataSource,
