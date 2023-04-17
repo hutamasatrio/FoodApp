@@ -13,6 +13,7 @@ import com.example.core.domain.model.Food
 import com.example.core.source.db.remote.Resource
 import com.example.core.ui.FoodRecyclerAdapter
 import com.example.foodapp.databinding.ActivityFoodBinding
+import com.example.foodapp.ui.detail.DetailFoodActivity
 import kotlinx.android.synthetic.main.activity_food.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,7 +50,7 @@ class FoodActivity : AppCompatActivity() {
         foodVM.set().observe(this,{food ->
             if (food != null){
                 when(food){
-                    is Resource.Error -> tesData(food.data)
+                    is Resource.Error -> Log.e("error", "error")
                     is Resource.Loading -> binding.progressFood.visibility = View.VISIBLE
                     is Resource.Success -> food.data?.let {
                         binding.progressFood.visibility = View.GONE
@@ -72,17 +73,12 @@ class FoodActivity : AppCompatActivity() {
 
     private fun setData() {
         foodAdapter.onItemClick = {selectedData ->
-            val intent = Intent(this@FoodActivity, FoodActivity::class.java)
+            val intent = Intent(this@FoodActivity, DetailFoodActivity::class.java)
             intent.putExtra("IDCategory", selectedData)
             startActivity(intent)
 
         }
     }
 
-    private fun tesData(food: List<Food>?) {
-        if (food != null) {
-            for (i in food)
-                Toast.makeText(this,i.strMeal,Toast.LENGTH_SHORT).show()
-        }
-    }
+
 }

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.detail.DetailFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.food.FoodActivity"
             android:exported="false" />
         <activity

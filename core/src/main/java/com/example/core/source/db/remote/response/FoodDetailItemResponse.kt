@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class FoodDetailItemResponse(
 
 	@field:SerializedName("strImageSource")
-	val strImageSource: Any? = null,
+	val strImageSource: String? = null,
 
 	@field:SerializedName("strIngredient10")
 	val strIngredient10: String? = null,
@@ -26,25 +26,25 @@ data class FoodDetailItemResponse(
 	val strIngredient13: String? = null,
 
 	@field:SerializedName("strIngredient16")
-	val strIngredient16: Any? = null,
+	val strIngredient16: String? = null,
 
 	@field:SerializedName("strIngredient15")
 	val strIngredient15: String? = null,
 
 	@field:SerializedName("strIngredient18")
-	val strIngredient18: Any? = null,
+	val strIngredient18: String? = null,
 
 	@field:SerializedName("strIngredient17")
-	val strIngredient17: Any? = null,
+	val strIngredient17: String? = null,
 
 	@field:SerializedName("strArea")
 	val strArea: String? = null,
 
 	@field:SerializedName("strCreativeCommonsConfirmed")
-	val strCreativeCommonsConfirmed: Any? = null,
+	val strCreativeCommonsConfirmed: String? = null,
 
 	@field:SerializedName("strIngredient19")
-	val strIngredient19: Any? = null,
+	val strIngredient19: String? = null,
 
 	@field:SerializedName("strTags")
 	val strTags: String? = null,
@@ -65,7 +65,7 @@ data class FoodDetailItemResponse(
 	val strIngredient2: String? = null,
 
 	@field:SerializedName("strIngredient20")
-	val strIngredient20: Any? = null,
+	val strIngredient20: String? = null,
 
 	@field:SerializedName("strIngredient5")
 	val strIngredient5: String? = null,
@@ -89,7 +89,7 @@ data class FoodDetailItemResponse(
 	val strMealThumb: String? = null,
 
 	@field:SerializedName("strMeasure20")
-	val strMeasure20: Any? = null,
+	val strMeasure20: String? = null,
 
 	@field:SerializedName("strYoutube")
 	val strYoutube: String? = null,
@@ -110,13 +110,13 @@ data class FoodDetailItemResponse(
 	val strMeasure11: String? = null,
 
 	@field:SerializedName("dateModified")
-	val dateModified: Any? = null,
+	val dateModified: String? = null,
 
 	@field:SerializedName("strDrinkAlternate")
-	val strDrinkAlternate: Any? = null,
+	val strDrinkAlternate: String? = null,
 
 	@field:SerializedName("strSource")
-	val strSource: Any? = null,
+	val strSource: String? = null,
 
 	@field:SerializedName("strMeasure9")
 	val strMeasure9: String? = null,
@@ -143,19 +143,19 @@ data class FoodDetailItemResponse(
 	val strMeasure1: String? = null,
 
 	@field:SerializedName("strMeasure18")
-	val strMeasure18: Any? = null,
+	val strMeasure18: String? = null,
 
 	@field:SerializedName("strMeasure2")
 	val strMeasure2: String? = null,
 
 	@field:SerializedName("strMeasure19")
-	val strMeasure19: Any? = null,
+	val strMeasure19: String? = null,
 
 	@field:SerializedName("strMeasure16")
-	val strMeasure16: Any? = null,
+	val strMeasure16: String? = null,
 
 	@field:SerializedName("strMeasure17")
-	val strMeasure17: Any? = null,
+	val strMeasure17: String? = null,
 
 	@field:SerializedName("strMeasure14")
 	val strMeasure14: String? = null,

@@ -1,13 +1,16 @@
 package com.example.core.di
 
 import com.example.core.domain.repository.CategoryRepo
+import com.example.core.domain.repository.DetailRepo
 import com.example.core.domain.repository.FoodRepo
 import com.example.core.source.db.remote.RemoteDataSource
 import com.example.core.source.db.remote.network.ApiService
 import com.example.core.source.mapper.CategoryMapper
 import com.example.core.source.mapper.CategoryMapperImp
+import com.example.core.source.mapper.DetailMapper
 import com.example.core.source.mapper.FoodMapper
 import com.example.core.source.repo.CategoryRepository
+import com.example.core.source.repo.DetailRepository
 import com.example.core.source.repo.FoodRepository
 import com.example.core.utils.AppExecutors
 import com.example.foodappdagger.core.data.mapper.ItemCategoriesMapper
@@ -81,11 +84,21 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
 
             )
         }
+
+        factory<DetailRepo> {
+            DetailRepository(
+                get(),
+                get(),
+                get()
+
+            )
+        }
     }
 
     val mapperModule = module {
         single<ItemCategoriesMapper> { ItemCategoriesMapperImp() }
         single<CategoryMapper> { CategoryMapperImp() }
         single<FoodMapper>{FoodMapper()}
+        single<DetailMapper>{DetailMapper()}
 
     }
