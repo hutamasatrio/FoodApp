@@ -2,6 +2,7 @@ package com.example.foodapp.ui.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.core.domain.model.Food
 import com.example.core.domain.model.FoodDetail
@@ -22,6 +23,12 @@ class DetailFoodVM (private val detailUseCase: DetailUseCase) : BaseVM(){
         val food : LiveData<Resource<List<FoodDetail>>> =
             detailUseCase.getDetail(idFood).asLiveData()
         return food
+    }
+
+    fun saveFav(food : FoodDetail){
+
+        detailUseCase.favFood(food)
+
     }
 
     val detail: LiveData<Resource<List<FoodDetail>>> =

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 class DetailInteractor (private val detailRepo: DetailRepo) : DetailUseCase {
     override fun getDetail(query: String) = detailRepo.getDetail(query)
+    override fun favFood(food: FoodDetail) = detailRepo.saveFood(food)
 
 }
 

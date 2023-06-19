@@ -1,14 +1,14 @@
 package com.example.core.di
 
+import androidx.room.Room
 import com.example.core.domain.repository.CategoryRepo
 import com.example.core.domain.repository.DetailRepo
 import com.example.core.domain.repository.FoodRepo
+import com.example.core.source.db.lokal.room.FavoriteDao
+import com.example.core.source.db.lokal.room.FavoriteDatabase
 import com.example.core.source.db.remote.RemoteDataSource
 import com.example.core.source.db.remote.network.ApiService
-import com.example.core.source.mapper.CategoryMapper
-import com.example.core.source.mapper.CategoryMapperImp
-import com.example.core.source.mapper.DetailMapper
-import com.example.core.source.mapper.FoodMapper
+import com.example.core.source.mapper.*
 import com.example.core.source.repo.CategoryRepository
 import com.example.core.source.repo.DetailRepository
 import com.example.core.source.repo.FoodRepository
@@ -17,6 +17,7 @@ import com.example.foodappdagger.core.data.mapper.ItemCategoriesMapper
 import com.example.foodappdagger.core.data.mapper.ItemCategoriesMapperImp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -48,6 +49,13 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
                 .build()
         }
         factory { provideRetrofit(get()) }
+        factory { get<FavoriteDatabase>().favoriteDao() }
+        single {
+            Room.databaseBuilder(
+                androidContext(),
+                FavoriteDatabase::class.java, "Foods.db"
+            ).fallbackToDestructiveMigration().build()
+        }
         single<ApiService> { provideNetworkApi(get()) }
 
 //        single {
@@ -89,6 +97,8 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
             DetailRepository(
                 get(),
                 get(),
+                get(),
+                get(),
                 get()
 
             )
@@ -100,5 +110,6 @@ fun provideNetworkApi(retrofit: Retrofit): ApiService =
         single<CategoryMapper> { CategoryMapperImp() }
         single<FoodMapper>{FoodMapper()}
         single<DetailMapper>{DetailMapper()}
+        single { DetailEntityMapper() }
 
     }

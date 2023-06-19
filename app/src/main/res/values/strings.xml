@@ -2,5 +2,6 @@
     <string name="app_name">FoodApp</string>
 
     <string name="nothing">nothing</string>
+    <string name="title_favorite">favorite</string>
 
 </resources>

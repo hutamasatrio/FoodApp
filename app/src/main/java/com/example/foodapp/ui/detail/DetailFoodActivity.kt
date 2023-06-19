@@ -217,6 +217,14 @@ class DetailFoodActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this,foodDetail?.strMeal.toString(),Toast.LENGTH_SHORT).show()
+
+        favLoveDetailI.setOnClickListener{
+            if (foodDetail != null){
+            detailVM.saveFav(foodDetail)}
+            else Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+
+        }
     }
+
 
 }

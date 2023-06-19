@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DetailUseCase {
     fun getDetail(query: String) : Flow<Resource<List<FoodDetail>>>
+    fun favFood(food : FoodDetail)
 }
 
