@@ -12,7 +12,6 @@ import com.example.foodapp.ui.category.MainVM
 import com.example.foodapp.ui.detail.DetailFoodVM
 import com.example.foodapp.ui.food.FoodVM
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val useCaseModule = module {

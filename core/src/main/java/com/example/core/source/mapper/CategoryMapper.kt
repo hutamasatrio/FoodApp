@@ -4,7 +4,7 @@ import com.example.core.domain.model.Category
 import com.example.core.source.db.remote.response.CategoryItemResponse
 import com.example.foodappdagger.core.data.mapper.BaseMapper
 
-class CategoryMapperImp : CategoryMapper {
+class CategoryMapper : BaseMapper<CategoryItemResponse,Category> {
     override fun mapToDomain(model: CategoryItemResponse): Category {
         return Category(
             model.strCategory,
@@ -24,4 +24,4 @@ class CategoryMapperImp : CategoryMapper {
     }
 }
 
-interface CategoryMapper : BaseMapper<CategoryItemResponse,Category>
+//interface CategoryMapper : BaseMapper<CategoryItemResponse,Category>

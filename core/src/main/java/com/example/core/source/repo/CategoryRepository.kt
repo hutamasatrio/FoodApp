@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 class CategoryRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val apiService: ApiService,
     private val categoryMapper : CategoryMapper
 ) : CategoryRepo {
     //    override fun getCategory() = apiService.getCategory()

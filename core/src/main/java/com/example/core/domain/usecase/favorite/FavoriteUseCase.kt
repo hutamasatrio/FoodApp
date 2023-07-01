@@ -8,7 +8,7 @@ import com.example.core.source.db.remote.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteUseCase {
-    fun getFavorite() : LiveData<List<FoodDetail>>
+    fun getFavorite() : Flow<List<FoodDetail>>
 //    fun mappingToObject(result : List<DetailFoodEntity>) : List<FoodDetail>
 
 }

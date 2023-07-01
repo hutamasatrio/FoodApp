@@ -3,7 +3,7 @@ package com.example.foodappdagger.core.data.mapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-interface BaseMapper1<Model, Domain> {
+interface BaseMapperEntity<Model, Domain> {
     fun mapToDomain(model: Model): Domain
     fun mapToModel(domain: Domain): Model
 

@@ -4,18 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.asLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.domain.model.Category
-import com.example.core.domain.model.Food
 import com.example.core.source.db.remote.Resource
 import com.example.core.ui.FoodRecyclerAdapter
 import com.example.foodapp.databinding.ActivityFoodBinding
 import com.example.foodapp.ui.detail.DetailFoodActivity
-import kotlinx.android.synthetic.main.activity_food.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -65,7 +60,7 @@ class FoodActivity : AppCompatActivity() {
 
     private fun setRV() {
         val rvFood = binding.rvFood
-        rvFood.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        rvFood.layoutManager = GridLayoutManager(this, 2)
         rvFood.setHasFixedSize(true)
         rvFood.adapter = foodAdapter
 

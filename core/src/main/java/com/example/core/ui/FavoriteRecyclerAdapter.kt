@@ -24,7 +24,7 @@ class FavoriteRecyclerAdapter: RecyclerView.Adapter<FavoriteRecyclerAdapter.List
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent,false))
+        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_fav, parent,false))
 
 
     override fun getItemCount() = listData.size

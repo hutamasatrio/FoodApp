@@ -16,12 +16,14 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFood(food: DetailFoodEntity)
 
+    @Query("SELECT * FROM detailFood ORDER BY idMeal ASC")
+    fun getFavorite() : Flow<List<DetailFoodEntity>>
+
     @Query("DELETE from detailFood where idMeal=:id ")
-    fun removeFood(id: String)
+    fun deleteFood(id: String)
 
     @Query("SELECT * FROM detailFood WHERE idMeal=:idMeals")
-    fun  getFavoriteFoodsById(idMeals: String) : LiveData<List<DetailFoodEntity>>
+    fun  cekFavorite(idMeals: String) : LiveData<List<DetailFoodEntity>>
 
-    @Query("SELECT * FROM detailFood ORDER BY idMeal ASC")
-    fun getFavorite() : LiveData<List<DetailFoodEntity>>
+
 }

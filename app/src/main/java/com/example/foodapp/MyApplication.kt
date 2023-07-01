@@ -1,6 +1,7 @@
 package com.example.foodapp
 
 import android.app.Application
+import com.example.core.di.databaseModule
 import com.example.core.di.mapperModule
 import com.example.core.di.networkModule
 import com.example.core.di.repositoryModule
@@ -25,7 +26,8 @@ class MyApplication : Application() {
                     repositoryModule,
                     useCaseModule,
                     viewModelModule,
-                    mapperModule
+                    mapperModule,
+                    databaseModule
                 )
             )
         }

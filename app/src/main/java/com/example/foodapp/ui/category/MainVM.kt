@@ -13,7 +13,5 @@ class MainVM (
     val category = categoryUseCase.getCategory().asLiveData()
 
 
-    override fun onError(error: Throwable) {
-        if (error.message != null) messageData.value = error.message
-    }
+
 }

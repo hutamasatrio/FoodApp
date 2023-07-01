@@ -9,8 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface FavoriteRepo {
-    fun getFavorite() : LiveData<List<FoodDetail>>
-//    fun mappingToObject(result : List<DetailFoodEntity>) : List<FoodDetail>
+    fun getFavorite() : Flow<List<FoodDetail>>
+//    fun setFavoriteTourism(food: FoodDetail, state: Boolean)
+
 
 
 }

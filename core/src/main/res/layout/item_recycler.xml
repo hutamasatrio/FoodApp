@@ -11,12 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgView"
             android:layout_width="match_parent"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"/>
+            android:layout_margin="10dp"
+            app:shapeAppearance="@style/roundedImageView" />
         <TextView
             android:id="@+id/categoryTitle"
             android:layout_width="match_parent"

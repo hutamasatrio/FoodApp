@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import com.example.core.domain.model.Category
 import com.example.core.domain.model.Food
 import com.example.core.domain.usecase.food.FoodUseCase
 import com.example.core.source.db.remote.Resource
@@ -35,12 +34,6 @@ class FoodVM (
 
     val food : LiveData<Resource<List<Food>>> =
         foodUseCase.getAllFood(idCategory).asLiveData()
-
-
-    override fun onError(error: Throwable) {
-        if (error.message != null) messageData.value = error.message
-
-    }
 
 
 }

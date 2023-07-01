@@ -11,6 +11,6 @@ abstract class BaseVM : ViewModel(){
         super.onCleared()
         compositeDisposable.dispose()
     }
-    abstract fun onError(error: Throwable)
+
 
 }

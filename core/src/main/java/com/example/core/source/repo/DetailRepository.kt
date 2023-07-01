@@ -1,30 +1,28 @@
 package com.example.core.source.repo
 
-import android.app.DownloadManager
+import androidx.lifecycle.asFlow
 import com.example.core.domain.model.FoodDetail
 import com.example.core.domain.repository.DetailRepo
+import com.example.core.source.db.lokal.entity.DetailFoodEntity
 import com.example.core.source.db.lokal.room.FavoriteDao
 import com.example.core.source.db.remote.NetworkOnlyResources
 import com.example.core.source.db.remote.RemoteDataSource
 import com.example.core.source.db.remote.Resource
 import com.example.core.source.db.remote.network.ApiResponse
-import com.example.core.source.db.remote.network.ApiService
 import com.example.core.source.db.remote.response.FoodDetailItemResponse
-import com.example.core.source.db.remote.response.FoodDetailResponse
-import com.example.core.source.mapper.CategoryMapper
 import com.example.core.source.mapper.DetailEntityMapper
 import com.example.core.source.mapper.DetailMapper
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.security.PrivateKey
+import java.util.concurrent.Executor
 
 class DetailRepository (
     private val remoteDataSource: RemoteDataSource,
-    private val apiService: ApiService,
     private val detailMapper : DetailMapper,
     private val detailEntityMapper: DetailEntityMapper,
+    private val executor: Executor,
     private val dao : FavoriteDao
         ): DetailRepo {
     override fun getDetail(query: String): Flow<Resource<List<FoodDetail>>> {
@@ -41,7 +39,28 @@ class DetailRepository (
     }
 
     override fun saveFood(food: FoodDetail) {
-        val toModel = detailEntityMapper.mapToModel(food)
-        dao.insertFood(toModel)
+
+        runBlocking {
+            val toModel = detailEntityMapper.mapToModel(food)
+            val job = GlobalScope.launch {
+                executor.execute { dao.insertFood(toModel) }
+            }
+            job.join()
+        }
+
+//        Thread{
+//            val toModel = detailEntityMapper.mapToModel(food)
+//            dao.insertFood(toModel)
+//        }
+
+    }
+
+    override fun deleteFood(id: String) {
+        executor.execute{dao.deleteFood(id)}
+    }
+
+    override fun cekFav(id: String): Flow<List<DetailFoodEntity>> {
+        return dao.cekFavorite(id).asFlow()
+
     }
 }

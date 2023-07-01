@@ -6,11 +6,12 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.source.db.remote.Resource
 import com.example.core.ui.MainRecyclerAdapter
 import com.example.foodapp.databinding.ActivityMainBinding
 import com.example.foodapp.ui.food.FoodActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -27,15 +28,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         setData()
         setRV()
         vm()
+
+        fav_menu.setOnClickListener{
+//            val intent : Intent
+//            intent.setComponent(com.example.foodapp.ui.category.MainActivity,)
+//
+//            startActivity(Intent(this, Class.forName(Favor)))
+
+            val launchIntent = Intent()
+            launchIntent.setClassName(this, "com.example.favorite.ui.FavoriteActivity")
+            startActivity(launchIntent)
+
+        }
 
     }
 
     private fun setRV() {
         val rvCategoryB = binding.rvCategory
-        rvCategoryB.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        rvCategoryB.layoutManager = GridLayoutManager(this, 2)
         rvCategoryB.setHasFixedSize(true)
         rvCategoryB.adapter = mainAdapter
 

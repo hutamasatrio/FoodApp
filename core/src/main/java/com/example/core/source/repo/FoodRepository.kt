@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.Flow
 
 class FoodRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val apiService: ApiService,
     private val foodMapper : FoodMapper
 ) : FoodRepo {
     override fun getFood(query : String): Flow<Resource<List<Food>>> {
