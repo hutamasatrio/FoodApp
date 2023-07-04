@@ -4,4 +4,13 @@
     <string name="nothing">nothing</string>
     <string name="title_favorite">favorite</string>
 
+    <string name="category">Category</string>
+    <string name="country">Country</string>
+    <string name="instruction">Instruction</string>
+    <string name="ingridient">Ingridient</string>
+    <string name="youtube">YOUTUBE</string>
+    <string name="source">SOURCE</string>
+    <string name="love">Save</string>
+
+
 </resources>

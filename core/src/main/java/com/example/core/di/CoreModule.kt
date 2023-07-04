@@ -15,6 +15,9 @@ import com.example.core.source.repo.DetailRepository
 import com.example.core.source.repo.FavoriteRepository
 import com.example.core.source.repo.FoodRepository
 import com.example.foodappdagger.core.data.mapper.ItemCategoryMapper
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -39,11 +42,20 @@ import java.util.concurrent.TimeUnit
 
     val networkModule = module {
         factory {
+            val hostname = "foodapp.kotlin.test"
+            val certificatePinner = CertificatePinner.Builder()
+                .add(hostname,"sha256/lPyrUHLK2rNbszkvntRe6bul03w8D87MgF2L5DKCgMo=")
+                .add(hostname,"sha256/81Wf12bcLlFHQAfJluxnzZ6Frg+oJ9PWY/Wrwur8viQ=")
+                .add(hostname,"sha256/hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=")
+
+
+                .build()
             OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor())
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
+                .certificatePinner(certificatePinner)
                 .build()
         }
         factory { provideRetrofit(get()) }
@@ -103,10 +115,14 @@ import java.util.concurrent.TimeUnit
             single { getExecutor() }
             factory { get<FavoriteDatabase>().favoriteDao() }
             single {
+                val passphrase:ByteArray = SQLiteDatabase.getBytes("dicoding".toCharArray())
+                val factory = SupportFactory(passphrase)
                 Room.databaseBuilder(
                     androidContext(),
                     FavoriteDatabase::class.java, "Foods.db"
-                ).fallbackToDestructiveMigration().build()
+                ).fallbackToDestructiveMigration()
+                    .openHelperFactory(factory)
+                    .build()
             }
         }
 

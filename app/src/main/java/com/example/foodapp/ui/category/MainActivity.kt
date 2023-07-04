@@ -1,14 +1,19 @@
 package com.example.foodapp.ui.category
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.source.db.remote.Resource
 import com.example.core.ui.MainRecyclerAdapter
+import com.example.foodapp.R
 import com.example.foodapp.databinding.ActivityMainBinding
 import com.example.foodapp.ui.food.FoodActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,10 +25,14 @@ class MainActivity : AppCompatActivity() {
     private val mainVM: MainVM by viewModel()
     private val mainAdapter = MainRecyclerAdapter()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         setData()
         setRV()
@@ -37,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+
+
 
     private fun setRV() {
         val rvCategoryB = binding.rvCategory

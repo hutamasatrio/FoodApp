@@ -47,7 +47,6 @@ data class DetailFoodEntity(
     val strTags: String,
 
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "idMeal")
     val idMeal: String,
 

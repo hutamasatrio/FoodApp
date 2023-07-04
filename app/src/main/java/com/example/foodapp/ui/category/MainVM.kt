@@ -5,7 +5,7 @@ import com.example.core.domain.usecase.category.CategoryUseCase
 import com.example.core.ui.BaseVM
 
 class MainVM(
-    private val categoryUseCase: CategoryUseCase
+    categoryUseCase: CategoryUseCase
 ) : BaseVM() {
 
     val category = categoryUseCase.getCategory().asLiveData()
