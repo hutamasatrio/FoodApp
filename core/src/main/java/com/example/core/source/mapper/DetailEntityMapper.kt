@@ -112,4 +112,6 @@ class DetailEntityMapper : BaseMapperEntity<DetailFoodEntity, FoodDetail> {
             domain.strMeasure15.toString()
         )
     }
+
+
 }

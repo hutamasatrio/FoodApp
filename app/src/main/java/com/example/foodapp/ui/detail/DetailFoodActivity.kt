@@ -4,6 +4,7 @@ package com.example.foodapp.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.example.core.source.db.remote.Resource
 import com.example.foodapp.R
 import com.example.foodapp.databinding.ActivityDetailFoodBinding
 import kotlinx.android.synthetic.main.activity_detail_food.*
+import kotlinx.coroutines.flow.emptyFlow
 import org.koin.android.ext.android.inject
 
 
@@ -39,8 +41,7 @@ class DetailFoodActivity : AppCompatActivity() {
             this.foodId = food.idMeal.toString()
             detailVM.getId(foodId)
 //            detailVM.cekFav(foodId)
-        }
-        else {
+        } else {
             this.foodId = foodFav!!.idMeal.toString()
             detailVM.getId(foodId)
         }
@@ -51,7 +52,7 @@ class DetailFoodActivity : AppCompatActivity() {
     }
 
 
-    private fun actionBar(){
+    private fun actionBar() {
         setSupportActionBar(toolbar)
         collapsing_toolbar.setContentScrimColor(resources.getColor(android.R.color.white))
         collapsing_toolbar.setCollapsedTitleTextColor(resources.getColor(R.color.colorPrimary))
@@ -63,11 +64,11 @@ class DetailFoodActivity : AppCompatActivity() {
 
 
     private fun vm() {
-        detailVM.set().observe(this,{ detailFood ->
-
-            if(detailFood != null){
-                when(detailFood){
-                    is Resource.Error   -> Toast.makeText(this,"tes error",Toast.LENGTH_SHORT).show()
+        detailVM.set().observe(this, { detailFood ->
+            if (detailFood != null) {
+                when (detailFood) {
+                    is Resource.Error -> Toast.makeText(this, "tes error", Toast.LENGTH_SHORT)
+                        .show()
                     is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                     is Resource.Success -> detailFood.data?.get(0).let {
                         binding.progressBar.visibility = View.GONE
@@ -84,12 +85,13 @@ class DetailFoodActivity : AppCompatActivity() {
     }
 
     private fun cekFav() {
+//        Log.d("terpanggil","jalan")
         detailVM.cekFav().observe(this, {
-
-            if (it.isEmpty()) {
-                favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
+            if (it.size == 1) {
+                Log.d("sesudah","jalan")
+                favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
             }
-            else favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
+            else favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
         })
     }
 
@@ -102,7 +104,7 @@ class DetailFoodActivity : AppCompatActivity() {
         tvCountry.text = foodDetail?.strArea
         tvInstructions.text = foodDetail?.strInstructions
 
-        for (i  in 0..21 ){
+        for (i in 0..21) {
             if (foodDetail?.strIngredient1?.isNotEmpty() == true) {
                 tvIngredient.append("\n \u2022 " + foodDetail?.strIngredient1)
             }
@@ -257,7 +259,7 @@ class DetailFoodActivity : AppCompatActivity() {
 
         favLoveDetailI.setOnClickListener {
             detailVM.cekFav().observe(this, {
-                if (it.isEmpty()) {
+                if (it.size != 1) {
                     detailVM.saveFav(foodDetail!!)
                     favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
                     Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()

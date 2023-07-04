@@ -13,6 +13,8 @@ class DetailInteractor (private val detailRepo: DetailRepo) : DetailUseCase {
     override fun favFood(food: FoodDetail) = detailRepo.saveFood(food)
     override fun deleteFood(id: String) = detailRepo.deleteFood(id)
     override fun cekFav(id: String): Flow<List<DetailFoodEntity>> = detailRepo.cekFav(id)
+    override fun mapper(food: List<DetailFoodEntity>) =
+        detailRepo.mapper(food)
 }
 
 

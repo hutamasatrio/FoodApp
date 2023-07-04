@@ -12,13 +12,13 @@ import com.example.core.domain.model.FoodDetail
 
 class FavoriteRecyclerAdapter: RecyclerView.Adapter<FavoriteRecyclerAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<FoodDetail>()
+    private var list = ArrayList<FoodDetail>()
     var onItemClick: ((FoodDetail) -> Unit)? = null
 
-    fun setData(newListData : List<FoodDetail>){
-        if (newListData == null) return
-        listData.clear()
-        listData.addAll(newListData)
+    fun setData(data : List<FoodDetail>){
+        if (data == null) return
+        list.clear()
+        list.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -27,11 +27,11 @@ class FavoriteRecyclerAdapter: RecyclerView.Adapter<FavoriteRecyclerAdapter.List
         ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler_fav, parent,false))
 
 
-    override fun getItemCount() = listData.size
+    override fun getItemCount() = list.size
 
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val data = listData[position]
+        val data = list[position]
         holder.bind(data)
     }
 
@@ -48,7 +48,7 @@ class FavoriteRecyclerAdapter: RecyclerView.Adapter<FavoriteRecyclerAdapter.List
         }
         init {
             binding.root.setOnClickListener{
-                onItemClick?.invoke(listData[adapterPosition])
+                onItemClick?.invoke(list[adapterPosition])
             }
         }
     }

@@ -12,6 +12,7 @@ interface DetailRepo {
     fun saveFood(food : FoodDetail)
     fun deleteFood(id : String)
     fun cekFav(id: String) : Flow<List<DetailFoodEntity>>
+    fun mapper(food : List<DetailFoodEntity>) : List<FoodDetail>
 
 
 

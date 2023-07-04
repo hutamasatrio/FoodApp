@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FoodActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityFoodBinding
+    private lateinit var binding: ActivityFoodBinding
     private val foodVM: FoodVM by viewModel()
     lateinit var categoryName: String
     private val foodAdapter = FoodRecyclerAdapter()
@@ -42,9 +42,9 @@ class FoodActivity : AppCompatActivity() {
     }
 
     private fun vm() {
-        foodVM.set().observe(this,{food ->
-            if (food != null){
-                when(food){
+        foodVM.set().observe(this, { food ->
+            if (food != null) {
+                when (food) {
                     is Resource.Error -> Log.e("error", "error")
                     is Resource.Loading -> binding.progressFood.visibility = View.VISIBLE
                     is Resource.Success -> food.data?.let {
@@ -67,7 +67,7 @@ class FoodActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        foodAdapter.onItemClick = {selectedData ->
+        foodAdapter.onItemClick = { selectedData ->
             val intent = Intent(this@FoodActivity, DetailFoodActivity::class.java)
             intent.putExtra("IDCategory", selectedData)
             startActivity(intent)

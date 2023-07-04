@@ -12,13 +12,13 @@ import com.example.core.domain.model.Food
 
 class FoodRecyclerAdapter : RecyclerView.Adapter<FoodRecyclerAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<Food>()
+    private var list = ArrayList<Food>()
     var onItemClick: ((Food) -> Unit)? = null
 
-    fun setData(newListData : List<Food>){
-        if (newListData == null) return
-        listData.clear()
-        listData.addAll(newListData)
+    fun setData(data : List<Food>){
+        if (data == null) return
+        list.clear()
+        list.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -27,11 +27,11 @@ class FoodRecyclerAdapter : RecyclerView.Adapter<FoodRecyclerAdapter.ListViewHol
         ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent,false))
 
 
-    override fun getItemCount() = listData.size
+    override fun getItemCount() = list.size
 
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val data = listData[position]
+        val data = list[position]
         holder.bind(data)
     }
 
@@ -48,7 +48,7 @@ class FoodRecyclerAdapter : RecyclerView.Adapter<FoodRecyclerAdapter.ListViewHol
             }
         init {
             binding.root.setOnClickListener{
-                onItemClick?.invoke(listData[adapterPosition])
+                onItemClick?.invoke(list[adapterPosition])
         }
         }
     }

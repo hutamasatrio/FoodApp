@@ -3,37 +3,62 @@ package com.example.foodapp.ui.detail
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import com.example.core.domain.model.Food
 import com.example.core.domain.model.FoodDetail
 import com.example.core.domain.usecase.detail.DetailUseCase
 import com.example.core.source.db.lokal.entity.DetailFoodEntity
 import com.example.core.source.db.remote.Resource
+import com.example.core.source.mapper.DetailEntityMapper
 import com.example.core.ui.BaseVM
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-class DetailFoodVM (private val detailUseCase: DetailUseCase) : BaseVM(){
+class DetailFoodVM(private val detailUseCase: DetailUseCase) : BaseVM() {
+    private val detailEntityMapper = DetailEntityMapper()
+
     private var idFood: String = ""
 
-    fun getId(query : String){
+    fun getId(query: String) {
         this.idFood = query
         Log.d("idDetailVM", idFood)
     }
 
     fun set(): LiveData<Resource<List<FoodDetail>>> {
         Log.d("idDetailVMset", idFood)
-        val food : LiveData<Resource<List<FoodDetail>>> =
+        val food: LiveData<Resource<List<FoodDetail>>> =
             detailUseCase.getDetail(idFood).asLiveData()
         return food
     }
 
-    fun saveFav(food : FoodDetail){
+    fun saveFav(food: FoodDetail) {
         detailUseCase.favFood(food)
     }
 
-    fun cekFav(): LiveData<List<DetailFoodEntity>> {
-        return detailUseCase.cekFav(idFood).asLiveData()
+    fun cekFav(): LiveData<List<FoodDetail>> {
+        val foodRaw = detailUseCase.cekFav(idFood)
+        val food = foodRaw.map{
+            detailUseCase.mapper(it)
+        }
+        return food.asLiveData()
+
+    }
+
+    fun cekFav1(): LiveData<FoodDetail> {
+        val foodRaw = detailUseCase.cekFav(idFood)
+        val food = foodRaw.map {
+            detailEntityMapper.mapToListDomain(it)
+        }
+        val v = food.map {
+            it[0]
+        }
+        return v.asLiveData()
+
     }
 
 
-    fun deleteFood(id: String){
+    fun deleteFood(id: String) {
         detailUseCase.deleteFood(id)
     }
 

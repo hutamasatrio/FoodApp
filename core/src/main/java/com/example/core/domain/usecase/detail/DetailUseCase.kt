@@ -11,6 +11,7 @@ interface DetailUseCase {
     fun favFood(food : FoodDetail)
     fun deleteFood(id : String)
     fun cekFav(id: String) : Flow<List<DetailFoodEntity>>
+    fun mapper (food : List<DetailFoodEntity>) : List<FoodDetail>
 
 }
 

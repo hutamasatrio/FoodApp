@@ -11,13 +11,13 @@ import com.example.core.domain.model.Category
 
 class MainRecyclerAdapter : RecyclerView.Adapter<MainRecyclerAdapter.ListViewHolder>() {
 
-    private var listData = ArrayList<Category>()
+    private var list = ArrayList<Category>()
     var onItemClick: ((Category) -> Unit)? = null
 
-    fun setData(newListData : List<Category>){
-        if (newListData == null) return
-        listData.clear()
-        listData.addAll(newListData)
+    fun setData(data : List<Category>){
+        if (data == null) return
+        list.clear()
+        list.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -26,11 +26,11 @@ class MainRecyclerAdapter : RecyclerView.Adapter<MainRecyclerAdapter.ListViewHol
         ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_recycler, parent,false))
 
 
-    override fun getItemCount() = listData.size
+    override fun getItemCount() = list.size
 
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val data = listData[position]
+        val data = list[position]
         holder.bind(data)
     }
 
@@ -47,7 +47,7 @@ class MainRecyclerAdapter : RecyclerView.Adapter<MainRecyclerAdapter.ListViewHol
             }
         init {
             binding.root.setOnClickListener{
-                onItemClick?.invoke(listData[adapterPosition])
+                onItemClick?.invoke(list[adapterPosition])
         }
         }
     }

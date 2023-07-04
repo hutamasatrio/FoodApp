@@ -63,4 +63,8 @@ class DetailRepository (
         return dao.cekFavorite(id).asFlow()
 
     }
+
+    override fun mapper(food: List<DetailFoodEntity>): List<FoodDetail> {
+        return  detailEntityMapper.mapToListDomain(food)
+    }
 }

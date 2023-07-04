@@ -17,28 +17,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
     private val mainVM: MainVM by viewModel()
     private val mainAdapter = MainRecyclerAdapter()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         setData()
         setRV()
         vm()
 
-        fav_menu.setOnClickListener{
-//            val intent : Intent
-//            intent.setComponent(com.example.foodapp.ui.category.MainActivity,)
-//
-//            startActivity(Intent(this, Class.forName(Favor)))
-
+        fav_menu.setOnClickListener {
             val launchIntent = Intent()
             launchIntent.setClassName(this, "com.example.favorite.ui.FavoriteActivity")
             startActivity(launchIntent)
@@ -56,19 +47,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun vm() {
-        mainVM.category.observe(this, Observer{ category ->
-            if (category != null){
-                when(category){
+        mainVM.category.observe(this, Observer { category ->
+            if (category != null) {
+                when (category) {
                     is Resource.Loading -> binding.progressMain.visibility = View.VISIBLE
                     is Resource.Success -> {
-                    binding.progressMain.visibility = View.GONE
-                    category.data?.let {
-                        mainAdapter.setData(it)
+                        binding.progressMain.visibility = View.GONE
+                        category.data?.let {
+                            mainAdapter.setData(it)
+
+                        }
 
                     }
-
-                }
-                    else -> Log.e("error","error")
+                    else -> Log.e("error", "error")
                 }
             }
         })
@@ -76,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        mainAdapter.onItemClick = {selectedData ->
+        mainAdapter.onItemClick = { selectedData ->
             val intent = Intent(this@MainActivity, FoodActivity::class.java)
             intent.putExtra("IDCategory", selectedData)
             startActivity(intent)

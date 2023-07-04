@@ -15,10 +15,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory <CategoryUseCase>{ CategoryInteractor(get()) }
-    factory <FoodUseCase>{ FoodInteractor(get()) }
-    factory <DetailUseCase>{ DetailInteractor(get()) }
-    factory <FavoriteUseCase>{ FavoriteInteractor(get()) }
+    factory<CategoryUseCase> { CategoryInteractor(get()) }
+    factory<FoodUseCase> { FoodInteractor(get()) }
+    factory<DetailUseCase> { DetailInteractor(get()) }
+    factory<FavoriteUseCase> { FavoriteInteractor(get()) }
 
 
 }
