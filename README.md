@@ -1,1 +1,1 @@
-[![hutamasatrio](https://circleci.com/gh/hutamasatrio/FoodApp.svg?style=svg)](https://circleci.com/gh/hutamasatrio/FoodApp)
+[![hutamasatrio](https://circleci.com/gh/hutamasatrio/FoodApp.svg?style=shield)](https://circleci.com/gh/hutamasatrio/FoodApp)
