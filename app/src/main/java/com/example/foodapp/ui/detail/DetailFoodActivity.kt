@@ -13,7 +13,17 @@ import com.example.core.domain.model.FoodDetail
 import com.example.core.source.db.remote.Resource
 import com.example.foodapp.R
 import com.example.foodapp.databinding.ActivityDetailFoodBinding
-import kotlinx.android.synthetic.main.activity_detail_food.*
+import kotlinx.android.synthetic.main.activity_detail_food.collapsing_toolbar
+import kotlinx.android.synthetic.main.activity_detail_food.favLoveDetailI
+import kotlinx.android.synthetic.main.activity_detail_food.imgViewDetail
+import kotlinx.android.synthetic.main.activity_detail_food.source
+import kotlinx.android.synthetic.main.activity_detail_food.toolbar
+import kotlinx.android.synthetic.main.activity_detail_food.tvCategory
+import kotlinx.android.synthetic.main.activity_detail_food.tvCountry
+import kotlinx.android.synthetic.main.activity_detail_food.tvIngredient
+import kotlinx.android.synthetic.main.activity_detail_food.tvInstructions
+import kotlinx.android.synthetic.main.activity_detail_food.tvMeasure
+import kotlinx.android.synthetic.main.activity_detail_food.youtube
 import org.koin.android.ext.android.inject
 
 

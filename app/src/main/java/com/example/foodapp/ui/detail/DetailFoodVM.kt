@@ -1,6 +1,5 @@
 package com.example.foodapp.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.core.domain.model.FoodDetail

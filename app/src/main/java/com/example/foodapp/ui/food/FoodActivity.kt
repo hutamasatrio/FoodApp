@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.domain.model.Category
 import com.example.core.source.db.remote.Resource
-import com.example.core.ui.FoodRecyclerAdapter
+import com.example.core.ui.FoodRecyclerAdapterDiffUtil
 import com.example.foodapp.databinding.ActivityFoodBinding
 import com.example.foodapp.ui.detail.DetailFoodActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,7 +18,7 @@ class FoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFoodBinding
     private val foodVM: FoodVM by viewModel()
     lateinit var categoryName: String
-    private val foodAdapter = FoodRecyclerAdapter()
+    private lateinit var foodAdapter : FoodRecyclerAdapterDiffUtil
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +34,9 @@ class FoodActivity : AppCompatActivity() {
 
         }
 
+        setData()
         setRV()
         vm()
-        setData()
 
 
     }
@@ -49,13 +49,23 @@ class FoodActivity : AppCompatActivity() {
                     is Resource.Loading -> binding.progressFood.visibility = View.VISIBLE
                     is Resource.Success -> food.data?.let {
                         binding.progressFood.visibility = View.GONE
-                        foodAdapter.setData(it)
+                        foodAdapter.differ.submitList(it)
+
 
                     }
                 }
             }
 
         })
+    }
+
+    private fun setData() {
+        foodAdapter = FoodRecyclerAdapterDiffUtil{ selectedData ->
+            val intent = Intent(this@FoodActivity, DetailFoodActivity::class.java)
+            intent.putExtra("IDCategory", selectedData)
+            startActivity(intent)
+
+        }
     }
 
     private fun setRV() {
@@ -66,14 +76,7 @@ class FoodActivity : AppCompatActivity() {
 
     }
 
-    private fun setData() {
-        foodAdapter.onItemClick = { selectedData ->
-            val intent = Intent(this@FoodActivity, DetailFoodActivity::class.java)
-            intent.putExtra("IDCategory", selectedData)
-            startActivity(intent)
 
-        }
-    }
 
 
 }

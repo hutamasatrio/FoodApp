@@ -1,29 +1,24 @@
 package com.example.foodapp.ui.category
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core.source.db.remote.Resource
-import com.example.core.ui.MainRecyclerAdapter
-import com.example.foodapp.R
+import com.example.core.ui.MainRecyclerAdapterDiffUtil
 import com.example.foodapp.databinding.ActivityMainBinding
 import com.example.foodapp.ui.food.FoodActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.fav_menu
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val mainVM: MainVM by viewModel()
-    private val mainAdapter = MainRecyclerAdapter()
+    private lateinit var mainAdapter : MainRecyclerAdapterDiffUtil
 
 
 
@@ -48,9 +43,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
     private fun setRV() {
         val rvCategoryB = binding.rvCategory
         rvCategoryB.layoutManager = GridLayoutManager(this, 2)
@@ -67,10 +59,8 @@ class MainActivity : AppCompatActivity() {
                     is Resource.Success -> {
                         binding.progressMain.visibility = View.GONE
                         category.data?.let {
-                            mainAdapter.setData(it)
-
+                            mainAdapter.differ.submitList(it)
                         }
-
                     }
                     else -> Log.e("error", "error")
                 }
@@ -80,11 +70,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        mainAdapter.onItemClick = { selectedData ->
+        mainAdapter = MainRecyclerAdapterDiffUtil{ selectedData ->
             val intent = Intent(this@MainActivity, FoodActivity::class.java)
             intent.putExtra("IDCategory", selectedData)
             startActivity(intent)
-
         }
     }
 
