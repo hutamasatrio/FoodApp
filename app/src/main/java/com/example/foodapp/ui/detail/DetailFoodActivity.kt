@@ -271,13 +271,18 @@ class DetailFoodActivity : AppCompatActivity() {
                     detailVM.saveFav(foodDetail!!)
                     favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
                     Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()
+                    overridePendingTransition(0,0)
                     this.recreate()
+                    overridePendingTransition(0,0)
+
 
                 } else {
                     detailVM.deleteFood(foodId)
                     favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
                     Toast.makeText(this, "Data Deleted", Toast.LENGTH_SHORT).show()
+                    overridePendingTransition(0,0)
                     this.recreate()
+                    overridePendingTransition(0,0)
 
 
                 }

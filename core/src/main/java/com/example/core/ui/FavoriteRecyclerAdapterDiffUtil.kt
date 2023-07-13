@@ -51,11 +51,14 @@ class FavoriteRecyclerAdapterDiffUtil(private val onItemClick: ((FoodDetail) -> 
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: FoodDetail, newItem: FoodDetail): Boolean {
+            val result = oldItem.idMeal == newItem.idMeal
+
             return oldItem == newItem
         }
 
     }
 
     val differ = AsyncListDiffer(this,differCallback)
+
 
 }

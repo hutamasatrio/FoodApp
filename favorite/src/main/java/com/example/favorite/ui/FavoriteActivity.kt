@@ -51,4 +51,14 @@ class FavoriteActivity : AppCompatActivity() {
         rvFavorite.adapter = favoriteAdapter
 
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        this.finish()
+        overridePendingTransition(0,0)
+        startActivity(intent)
+        overridePendingTransition(0,0)
+    }
+
+
 }
