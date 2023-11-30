@@ -1,5 +1,6 @@
 package com.example.foodapp.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.core.domain.model.FoodDetail
@@ -8,6 +9,7 @@ import com.example.core.source.db.remote.Resource
 import com.example.core.source.mapper.DetailEntityMapper
 import com.example.core.ui.BaseVM
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 
 class DetailFoodVM(private val detailUseCase: DetailUseCase) : BaseVM() {
     private val detailEntityMapper = DetailEntityMapper()
@@ -26,7 +28,9 @@ class DetailFoodVM(private val detailUseCase: DetailUseCase) : BaseVM() {
 
     fun cekFav(): LiveData<List<FoodDetail>> {
         val foodRaw = detailUseCase.cekFav(idFood)
+        Log.d( "cekFav", "onCheck : " + foodRaw.asLiveData())
         val food = foodRaw.map{
+            Log.d( "cekFav", "map")
             detailUseCase.mapper(it)
         }
         return food.asLiveData()
@@ -50,6 +54,5 @@ class DetailFoodVM(private val detailUseCase: DetailUseCase) : BaseVM() {
 
     val detail: LiveData<Resource<List<FoodDetail>>> =
         detailUseCase.getDetail(idFood).asLiveData()
-
 
 }

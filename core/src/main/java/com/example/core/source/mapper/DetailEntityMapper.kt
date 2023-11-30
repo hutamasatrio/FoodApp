@@ -2,7 +2,6 @@ package com.example.core.source.mapper
 
 import com.example.core.domain.model.FoodDetail
 import com.example.core.source.db.lokal.entity.DetailFoodEntity
-import com.example.foodappdagger.core.data.mapper.BaseMapperEntity
 
 class DetailEntityMapper : BaseMapperEntity<DetailFoodEntity, FoodDetail> {
     override fun mapToDomain(model: DetailFoodEntity): FoodDetail {

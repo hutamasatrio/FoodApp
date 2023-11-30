@@ -72,7 +72,7 @@ class DetailFoodActivity : AppCompatActivity() {
 
 
     private fun vm() {
-        detailVM.set().observe(this, { detailFood ->
+        detailVM.set().observe(this) { detailFood ->
             if (detailFood != null) {
                 when (detailFood) {
                     is Resource.Error -> Toast.makeText(this, "tes error", Toast.LENGTH_SHORT)
@@ -88,19 +88,18 @@ class DetailFoodActivity : AppCompatActivity() {
                 }
             }
 
-        })
+        }
 
     }
 
     private fun cekFav() {
 //        Log.d("terpanggil","jalan")
-        detailVM.cekFav().observe(this, {
+        detailVM.cekFav().observe(this) {
             if (it.size == 1) {
-                Log.d("sesudah","jalan")
+                Log.d("sesudah", "jalan")
                 favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
-            }
-            else favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
-        })
+            } else favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
+        }
     }
 
     private fun setData(foodDetail: FoodDetail?) {
@@ -266,28 +265,28 @@ class DetailFoodActivity : AppCompatActivity() {
 
 
         favLoveDetailI.setOnClickListener {
-            detailVM.cekFav().observe(this, {
+            detailVM.cekFav().observe(this
+            ) {
                 if (it.size != 1) {
                     detailVM.saveFav(foodDetail!!)
                     favLoveDetailI.setBackgroundResource(R.drawable.ic_baseline_favorite)
                     Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()
-                    overridePendingTransition(0,0)
+                    overridePendingTransition(0, 0)
                     this.recreate()
-                    overridePendingTransition(0,0)
+                    overridePendingTransition(0, 0)
 
 
                 } else {
                     detailVM.deleteFood(foodId)
                     favLoveDetailI.setBackgroundResource(R.drawable.ic_favorite_border)
                     Toast.makeText(this, "Data Deleted", Toast.LENGTH_SHORT).show()
-                    overridePendingTransition(0,0)
+                    overridePendingTransition(0, 0)
                     this.recreate()
-                    overridePendingTransition(0,0)
+                    overridePendingTransition(0, 0)
 
 
                 }
             }
-            )
         }
     }
 }

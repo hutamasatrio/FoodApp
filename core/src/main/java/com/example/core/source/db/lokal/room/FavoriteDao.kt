@@ -22,7 +22,7 @@ interface FavoriteDao {
     @Query("DELETE from detailFood where idMeal=:id ")
     fun deleteFood(id: String)
 
-    @Query("SELECT * FROM detailFood WHERE idMeal=:idMeals")
+    @Query("SELECT * from detailFood WHERE idMeal=:idMeals")
     fun  cekFavorite(idMeals: String) : LiveData<List<DetailFoodEntity>>
 
 

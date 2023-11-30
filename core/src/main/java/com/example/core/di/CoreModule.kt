@@ -47,8 +47,6 @@ import java.util.concurrent.TimeUnit
                 .add(hostname,"sha256/lPyrUHLK2rNbszkvntRe6bul03w8D87MgF2L5DKCgMo=")
                 .add(hostname,"sha256/81Wf12bcLlFHQAfJluxnzZ6Frg+oJ9PWY/Wrwur8viQ=")
                 .add(hostname,"sha256/hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=")
-
-
                 .build()
             OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor())
@@ -119,9 +117,10 @@ import java.util.concurrent.TimeUnit
                 val factory = SupportFactory(passphrase)
                 Room.databaseBuilder(
                     androidContext(),
-                    FavoriteDatabase::class.java, "Foods.db"
-                ).fallbackToDestructiveMigration()
-                    .openHelperFactory(factory)
+                    FavoriteDatabase::class.java, "Foods.db")
+                    .fallbackToDestructiveMigration()
+                        //turn off sqlCypher
+//                    .openHelperFactory(factory)
                     .build()
             }
         }
